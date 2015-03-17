@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LetraAViewController : UIViewController
+@interface LetraViewController : UIViewController
+
+@property UIButton *botao;
+@property NSArray *palavras;
 
 @end

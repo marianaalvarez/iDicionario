@@ -12,5 +12,6 @@
 
 @property UIButton *botao;
 @property NSArray *palavras;
+@property UIImageView *image;
 
 @end

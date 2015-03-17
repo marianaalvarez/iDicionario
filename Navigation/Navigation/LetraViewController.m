@@ -15,7 +15,7 @@ static int indice = 0;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    _palavras = @[@"Abelha",@"Bola",@"Cavalo",@"Diamante",@"Ema",@"Foca",@"Gorila",@"Helicoptero",@"Indio",@"Janela",@"Kooks",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
+    _palavras = @[@"Alien",@"Balao",@"Coelho",@"Dori",@"Entei",@"Foguete",@"Gato",@"Hiena",@"Indio",@"Jacare",@"Kiwi",@"Leao",@"Monica",@"Nemo",@"Ornitorrinco",@"Pikachu",@"Queijo",@"Rato",@"Superman",@"Timao",@"Urso",@"Videogame",@"Wolverine",@"Xmen",@"Yugioh",@"Zumbi"];
     
     UIBarButtonItem *back = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(back:)];
@@ -25,8 +25,9 @@ static int indice = 0;
     self.navigationItem.rightBarButtonItem=next;
     self.navigationItem.leftBarButtonItem=back;
     
-
-
+    _image = [[UIImageView alloc]initWithFrame:CGRectMake(115.f, 115.0f, 100.f, 100.f)];
+    
+    [self.view addSubview:_image];
     
     _botao = [UIButton
                                         buttonWithType:UIButtonTypeSystem];
@@ -43,6 +44,7 @@ static int indice = 0;
      forState:UIControlStateNormal];
     [_botao sizeToFit];
     _botao.center = self.view.center;
+    _image.image = [UIImage imageNamed:_palavras[indice]];
     
 }
 

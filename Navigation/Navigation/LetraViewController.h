@@ -12,6 +12,8 @@
 
 @property UIButton *botao;
 @property NSArray *palavras;
+@property (weak, nonatomic) IBOutlet UIImageView *imagem;
 @property UIImageView *image;
+@property (weak,nonatomic) NSTimer *timer;
 
 @end

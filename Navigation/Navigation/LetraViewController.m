@@ -44,12 +44,28 @@ static int indice = 0;
      forState:UIControlStateNormal];
     [_botao sizeToFit];
     _botao.center = self.view.center;
+    
+    [self.view addSubview:_image];
     _image.image = [UIImage imageNamed:_palavras[indice]];
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"position"];
+    [shake setDuration:0.1];
+    [shake setRepeatCount:2];
+    [shake setAutoreverses:YES];
+    [shake setFromValue:[NSValue valueWithCGPoint:
+                         CGPointMake(_image.center.x - 5, _image.center.y)]];
+    [shake setToValue:[NSValue valueWithCGPoint:
+                       CGPointMake(_image.center.x + 5, _image.center.y)]];
+    [_image.layer addAnimation:shake forKey:@"position"];
+}
 
-
+-(void)parar {
+    [_timer invalidate];
+    _timer = nil;
+}
 -(void)next:(id)sender {
     indice++;
     if (indice == 26) {

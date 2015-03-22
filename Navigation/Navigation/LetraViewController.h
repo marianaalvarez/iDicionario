@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Palavras.h"
 
 @interface LetraViewController : UIViewController
 
 @property UIButton *botao;
-@property NSArray *palavras;
-@property (weak, nonatomic) IBOutlet UIImageView *imagem;
 @property UIImageView *image;
 @property (weak,nonatomic) NSTimer *timer;
+@property Palavras *lista;
+@property UILabel *letra;
 
 @end

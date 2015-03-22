@@ -8,6 +8,7 @@
 
 #import "MackenzieAppDelegate.h"
 #import "LetraViewController.h"
+#import "TableViewController.h"
 
 @implementation MackenzieAppDelegate
 
@@ -22,11 +23,24 @@
                                  initWithRootViewController:viewController];
     self.window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.navigationController;
-
-
     
+    TableViewController *tableVC = [[TableViewController alloc] init];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    tabBarController.viewControllers = @[self.navigationController, tableVC];
+    
+    [[tabBarController.tabBar.items objectAtIndex:0] setTitle:@"Dicionario"];
+    [[tabBarController.tabBar.items objectAtIndex:1] setTitle:@"Lista"];
+    
+    [[tabBarController.tabBar.items objectAtIndex:0] setImage:[UIImage imageNamed:@"literature-25"]];
+    [[tabBarController.tabBar.items objectAtIndex:1] setImage:[UIImage imageNamed:@"list-26"]];
+    
+    //self.navigationController.toolbarHidden = NO;
+
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = tabBarController;
+    
     [self.window makeKeyAndVisible];
     
     return YES;

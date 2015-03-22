@@ -151,4 +151,28 @@ static int indice = 0;
     
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.3/1.5 animations:^{
+        _image.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.3, 1.3);
+    } /*completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3/2 animations:^{
+            _image.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3/2 animations:^{
+                _image.transform = CGAffineTransformIdentity;
+            }];
+        }];*/
+    ];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.3/1.5 animations:^{
+       _image.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+       } completion:^(BOOL finished) {
+       [UIView animateWithDuration:0.3/2 animations:^{
+       _image.transform = CGAffineTransformIdentity;
+       }];
+    }];
+}
+
 @end

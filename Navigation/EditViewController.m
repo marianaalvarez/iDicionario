@@ -49,7 +49,7 @@
 }
 
 -(void)salvar {
-    [_lista.palavras insertObject:_texto.text atIndex:(NSUInteger)_indice];
+    [_lista.palavras replaceObjectAtIndex:(NSUInteger)_indice withObject:_texto.text];
 }
 
 /*

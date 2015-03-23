@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Palavras.h"
 
-@interface LetraViewController : UIViewController
+@interface LetraViewController : UIViewController <UIImagePickerControllerDelegate>
 
 @property UIButton *botao;
 @property UIImageView *image;
 @property (weak,nonatomic) NSTimer *timer;
 @property Palavras *lista;
 @property UILabel *letra;
+@property UIImagePickerController *picker;
 
 @end

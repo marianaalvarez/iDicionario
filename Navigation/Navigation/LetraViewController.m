@@ -19,11 +19,14 @@ static int indice = 0;
 -(void) viewDidLoad {
     [super viewDidLoad];
     _lista = [Palavras sharedInstance];
-    _lista.palavras = @[@"Alien",@"Balao",@"Coelho",@"Dori",@"Entei",@"Foguete",@"Gato",@"Hiena",@"Indio",@"Jacare",@"Kiwi",@"Leao",@"Monica",@"Nemo",@"Ornitorrinco",@"Pikachu",@"Queijo",@"Rato",@"Superman",@"Timao",@"Urso",@"Videogame",@"Wolverine",@"Xmen",@"Yugioh",@"Zumbi"];
     
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGestureRecognizer:)];
     
     [self.view addGestureRecognizer:panGestureRecognizer];
+    
+    _picker = [[UIImagePickerController alloc]init];
+    _picker.delegate = self;
+    _picker.allowsEditing = YES;
     
     UIBarButtonItem *back = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(back:)];
@@ -47,7 +50,13 @@ static int indice = 0;
                                                     style: UIBarButtonItemStyleBordered
                                                    target: self
                                                    action: @selector( edit ) ];
-    toolBar.items = [ NSArray arrayWithObject: buttonItem ];
+    
+    UIBarButtonItem *fotoPick = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(imagePicker)];
+
+    NSArray *items = [[NSArray alloc]initWithObjects:buttonItem, fotoPick, nil];
+    [toolBar sizeToFit];
+    toolBar.items = items;
+    //toolBar.items = [ NSArray arrayWithObject: buttonItem ];
     
     [self.view addSubview:_letra];
     [self.view addSubview:_image];
@@ -154,15 +163,8 @@ static int indice = 0;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [UIView animateWithDuration:0.3/1.5 animations:^{
         _image.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.3, 1.3);
-    } /*completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3/2 animations:^{
-            _image.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3/2 animations:^{
-                _image.transform = CGAffineTransformIdentity;
-            }];
-        }];*/
-    ];
+
+    }];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -174,5 +176,40 @@ static int indice = 0;
        }];
     }];
 }
+
+- (void)imagePicker{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    _picker.delegate = self;
+    _picker.allowsEditing = YES;
+    _picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //[sender setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [self presentViewController:_picker animated:YES completion:NULL];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    _image.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (NSString *)saveImage: (UIImage *)image {
+    NSString *path;
+    if (image != nil)
+    {
+        path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                   NSUserDomainMask, YES)[0];
+        path = [path stringByAppendingPathComponent:
+                [NSString stringWithFormat:@"%@.png", _botao]];
+        NSData* data = UIImagePNGRepresentation(image);
+        [data writeToFile:path atomically:YES];
+    }
+    return path;
+}
+
 
 @end

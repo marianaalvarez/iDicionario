@@ -2,7 +2,7 @@
 //  TableViewController.m
 //  Navigation
 //
-//  Created by Mariana Alvarez on 18/03/15.
+//  Created by Mariana on 18/03/15.
 //  Copyright (c) 2015 Vinicius Miana. All rights reserved.
 //
 
